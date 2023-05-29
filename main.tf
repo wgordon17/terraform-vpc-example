@@ -1,4 +1,5 @@
 locals {
+  cluster_id_tag = "kubernetes.io/cluster/${resource.random_string.infra_id.result}"
   supported_regions = [
     "eu-central-1",
     "eu-west-1",
@@ -42,6 +43,12 @@ locals {
   )
 }
 
+
+resource "random_string" "infra_id" {
+  length  = 20
+  upper   = false
+  special = false
+}
 
 # Performing multi-input validations in null_resource block
 # https://github.com/hashicorp/terraform/issues/25609
@@ -140,8 +147,11 @@ module "vpc" {
   enable_dns_support   = true
 
   tags = {
-    Terraform    = "true"
-    service      = "ROSA"
-    cluster_name = var.cluster_name
+    Terraform = "true"
+    # tflint-ignore: terraform_deprecated_interpolation
+    "${local.cluster_id_tag}" = "shared"
+    service                   = "ROSA"
+    cluster_name              = var.cluster_name
+    infra_id                  = resource.random_string.infra_id.result
   }
 }
