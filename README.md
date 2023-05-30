@@ -37,6 +37,7 @@
 | terraform | >= 1.4.0 |
 | aws | ~> 4.0 |
 | null | ~> 3.2 |
+| random | ~> 3.5 |
 
 ## Providers
 
@@ -44,6 +45,7 @@
 |------|---------|
 | aws | 4.67.0 |
 | null | 3.2.1 |
+| random | 3.5.1 |
 
 ## Modules
 
@@ -56,6 +58,7 @@
 | Name | Type |
 |------|------|
 | [null_resource.validations](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [random_string.infra_id](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 | [aws_availability_zones.available_azs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 
 ## Inputs
@@ -74,6 +77,7 @@
 
 | Name | Description |
 |------|-------------|
+| cluster-infra-id | Infra ID randomly generated for the cluster |
 | cluster-private-subnets | List of private subnet IDs created. |
 | cluster-public-subnets | List of private subnet IDs created. |
 | cluster-subnets-string | Comma-separated string of all subnet IDs created for this cluster. |
